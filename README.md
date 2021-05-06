@@ -1,2 +1,1 @@
-# musinsa-demo
 # musinsa-homework
