@@ -10,6 +10,7 @@ import queryString from "query-string";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Character } from "store/types/characters";
 import CharacterItem from "components/CharacterItem";
+import { FaBan, FaFemale, FaSyncAlt, FaRegLaughSquint } from "react-icons/fa";
 
 type FilterState = {
   isAlive: boolean;
@@ -101,21 +102,39 @@ function App() {
           onClick={() => onClickFilter("isAlive")}
           active={filter.isAlive}
         >
+          <FilterIconWrap>
+            <FaRegLaughSquint />
+          </FilterIconWrap>
+
           {"생존인물만"}
         </Filter>
         <Filter
           onClick={() => onClickFilter("isFemale")}
           active={filter.isFemale}
         >
+          <FilterIconWrap>
+            <FaFemale />
+          </FilterIconWrap>
+
           {"여자"}
         </Filter>
         <Filter
           onClick={() => onClickFilter("hasNoTvSeries")}
           active={filter.hasNoTvSeries}
         >
+          <FilterIconWrap>
+            <FaBan />
+          </FilterIconWrap>
+
           {"tvSeries 없음"}
         </Filter>
-        <Filter onClick={resetRemovedIds}>{"초기화"}</Filter>
+        <Filter onClick={resetRemovedIds}>
+          <FilterIconWrap>
+            <FaSyncAlt />
+          </FilterIconWrap>
+
+          {"초기화"}
+        </Filter>
       </Filters>
 
       <InfiniteScroll
@@ -158,32 +177,55 @@ const Header = styled.header`
   width: 100%;
   height: 100px;
 
-  background-color: #000;
+  background-color: #000000;
   color: #fff;
 `;
 
 const Filters = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
+  justify-content: flex-start;
+  flex-wrap: wrap;
   width: 100%;
   padding: 24px 24px 12px 24px;
+`;
+
+const FilterIconWrap = styled.div<{ active?: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  margin-right: 2px;
+
+  svg {
+    fill: ${(props) => (props.active ? "#ffffff" : "#e0e0e0")};
+  }
 `;
 
 const Filter = styled.button<{ active?: boolean }>`
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
-  width: 23%;
-  padding: 4px 6px;
-  color: ${(props) => (props.active ? "#ffffff" : "#212121")};
-  background-color: ${(props) => (props.active ? "#00a3ff" : "#ffffff")};
-  border: 1px solid ${(props) => (props.active ? "#00a3ff" : "#212121")};
-  border-radius: 6px;
+  width: auto;
+  height: 34px;
 
+  padding: 0 12px 0 8px;
+  margin-right: 8px;
+  margin-bottom: 6px;
+  transition: background-color 0.15s linear;
+
+  color: ${(props) => (props.active ? "#ffffff" : "#ffffff")};
+  background-color: ${(props) => (props.active ? "#00a3ff" : "#616161")};
+  border-radius: 16px;
+  border: none;
   cursor: pointer;
+  &:hover {
+    background-color: ${(props) =>
+      props.active ? "#00a3ff" : "rgb(109, 109, 109)"};
+  }
 `;
 
 const List = styled.ul`
