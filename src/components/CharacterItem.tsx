@@ -65,16 +65,18 @@ export default CharacterItem;
 
 const Container = styled.li`
   width: 100%;
+  max-width: 375px;
   margin-bottom: 24px;
+  margin-right: 24px;
 
   padding: 24px;
 
   -webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  background-color: #424242;
+  background-color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.7);
+  color: #616161;
   &::last-child {
     margin-bottom: 0;
   }

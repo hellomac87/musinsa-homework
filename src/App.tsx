@@ -101,7 +101,13 @@ function App() {
 
   return (
     <Container>
-      <Header>{"Musinsa Homework"}</Header>
+      <Header>
+        <img
+          src={`http://image.musinsa.com/mfile_outsrc/img/logo-simbol-musinsache.png?v=1`}
+          alt="무신사로고"
+        />
+        {"Homework"}
+      </Header>
 
       <Filters>
         <Filter
@@ -114,17 +120,18 @@ function App() {
 
           {"생존인물만"}
         </Filter>
-        <Filter
+
+        <FilterFemale
           onClick={() => onClickFilter("isFemale")}
           active={filter.isFemale}
-          femaleFilter={true}
         >
           <FilterIconWrap>
             <FaFemale />
           </FilterIconWrap>
 
           {"여자"}
-        </Filter>
+        </FilterFemale>
+
         <Filter
           onClick={() => onClickFilter("hasNoTvSeries")}
           active={filter.hasNoTvSeries}
@@ -187,24 +194,45 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  padding: 24px 0;
   width: 100%;
-  height: 100px;
 
-  background-color: #000000;
+  background-color: #121212;
   color: #fff;
-  font-size: 2.4rem;
+  font-size: 1.1rem;
+  line-height: -1.2rem;
+  img {
+    height: 100px;
+    margin-bottom: 12px;
+  }
 `;
 
 const Filters = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   width: 100%;
   padding: 24px 24px 12px 24px;
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: auto;
+    height: 34px;
+
+    padding: 0 12px 0 8px;
+    margin-right: 8px;
+    margin-bottom: 6px;
+    /* transition: background-color 0.15s linear; */
+    cursor: pointer;
+  }
 `;
 
-const FilterIconWrap = styled.div<{ active?: boolean }>`
+const FilterIconWrap = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -212,38 +240,25 @@ const FilterIconWrap = styled.div<{ active?: boolean }>`
   width: 24px;
   height: 24px;
   margin-right: 2px;
-
-  svg {
-    fill: ${(props) => (props.active ? "#ffffff" : "#e0e0e0")};
-  }
 `;
 
-const Filter = styled.button<{ active?: boolean; femaleFilter?: boolean }>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
+const Filter = styled.button<{ active?: boolean }>`
+  color: ${(props) => (props.active ? "#ffffff" : "#b2b2b2")};
+  background: ${(props) => (props.active ? "#00a3ff" : "#ffffff")};
+  border: 1px solid ${(props) => (props.active ? "#00a3ff" : "#ddd")};
+`;
 
-  width: auto;
-  height: 34px;
-
-  padding: 0 12px 0 8px;
-  margin-right: 8px;
-  margin-bottom: 6px;
-  transition: background-color 0.15s linear;
-
-  color: #ffffff;
-  background-color: ${(props) => (props.active ? "#00a3ff" : "#616161")};
-  border-radius: 16px;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${(props) =>
-      props.active ? "#00a3ff" : "rgb(109, 109, 109)"};
-  }
+const FilterFemale = styled.button<{ active?: boolean }>`
+  color: ${(props) => (props.active ? "#ffffff" : "#b2b2b2")};
+  background: ${(props) => (props.active ? "#f48fb1" : "#ffffff")};
+  border: 1px solid ${(props) => (props.active ? "#f48fb1" : "#ddd")};
 `;
 
 const List = styled.ul`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
   width: 100%;
   padding: 12px 24px;
 `;
