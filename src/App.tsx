@@ -10,7 +10,13 @@ import queryString from "query-string";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Character } from "store/types/characters";
 import CharacterItem from "components/CharacterItem";
-import { FaBan, FaFemale, FaSyncAlt, FaRegLaughSquint } from "react-icons/fa";
+import {
+  FaBan,
+  FaFemale,
+  FaSyncAlt,
+  FaRegLaughSquint,
+  FaSpinner,
+} from "react-icons/fa";
 
 type FilterState = {
   isAlive: boolean;
@@ -159,7 +165,12 @@ function App() {
         </List>
       </InfiniteScroll>
 
-      {fetching && <Fetching>fetching...</Fetching>}
+      {fetching && (
+        <Fetching>
+          <FaSpinner />
+          {"fetching..."}
+        </Fetching>
+      )}
     </Container>
   );
 }
@@ -239,4 +250,5 @@ const Fetching = styled.div`
   justify-content: center;
   width: 100%;
   height: 50px;
+  color: #ffffff;
 `;
