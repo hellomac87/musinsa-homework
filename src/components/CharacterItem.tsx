@@ -1,5 +1,12 @@
 import { Character } from "store/types/characters";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import {
+  FaBookDead,
+  FaRegLaughSquint,
+  FaFemale,
+  FaTv,
+  FaBook,
+} from "react-icons/fa";
 
 interface Props {
   character: Character;
@@ -7,10 +14,14 @@ interface Props {
 }
 
 function CharacterItem({ character, onClickDelete }: Props) {
+  const isFemale = character.gender === "Female";
   return (
     <Container>
       <NameWrap>
-        <Label>{"Name :"}</Label> {character.name || "No Name"}
+        <NameLabel isFemale={isFemale}>
+          {character.name ? character.name.slice(0, 2) : "-"}
+        </NameLabel>
+        <Name>{character.name || "-"}</Name>
       </NameWrap>
       <AliaseWrap>
         <Label>{"Aliase :"}</Label>
@@ -27,9 +38,23 @@ function CharacterItem({ character, onClickDelete }: Props) {
           <li key={title}>{title}</li>
         ))}
       </ul>
-      <div>books:{character.books.length}</div>
-      <div>tvSeries:{character.tvSeries.length}</div>
-      <div>gender: {character.gender}</div>
+      <div>
+        <FaWrapper size={1.3}>
+          <FaBook />
+        </FaWrapper>
+        :{character.books.length}
+      </div>
+      <div>
+        <FaWrapper size={1.3}>
+          <FaTv />
+        </FaWrapper>
+        :{character.tvSeries.length}
+      </div>
+
+      <div>
+        {character.died ? <FaBookDead /> : <FaRegLaughSquint />}{" "}
+        {character.gender === "Female" && <FaFemale />}
+      </div>
       {/* <div>dead: {character.died}</div> */}
       <button onClick={onClickDelete}>{"삭제"}</button>
     </Container>
@@ -56,7 +81,38 @@ const Container = styled.li`
 `;
 
 const NameWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
+  margin-bottom: 8px;
+`;
+
+const NameLabel = styled.div<{ isFemale: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+
+  border-radius: 20px;
+  background-color: #616161;
+  ${(props) =>
+    props.isFemale
+      ? css`
+          background-color: #f48fb1;
+          color: #616161;
+        `
+      : css`
+          background-color: #90caf9;
+          color: #616161;
+        `}
+`;
+
+const Name = styled.div`
+  width: calc(100% - 40px);
+  padding: 0 12px;
+  font-size: 1.5rem;
 `;
 
 const AliaseWrap = styled.div`
@@ -73,4 +129,12 @@ const EllipseList = styled.ul`
   width: 100%;
   max-width: calc(100% - 60px);
   display: inline-block;
+`;
+
+const FaWrapper = styled.div<{ size?: number }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: ${(props) => props.size && `${props.size}rem`};
 `;

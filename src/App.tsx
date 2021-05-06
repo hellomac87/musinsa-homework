@@ -5,7 +5,7 @@ import {
   fetchCharacters,
   selectCharactors,
 } from "store/slices/charactersSlice";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import queryString from "query-string";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Character } from "store/types/characters";
@@ -117,6 +117,7 @@ function App() {
         <Filter
           onClick={() => onClickFilter("isFemale")}
           active={filter.isFemale}
+          femaleFilter={true}
         >
           <FilterIconWrap>
             <FaFemale />
@@ -146,7 +147,8 @@ function App() {
       <InfiniteScroll
         dataLength={items.length}
         next={fetchNext}
-        hasMore={params.page < 10}
+        // hasMore={params.page < 10}
+        hasMore={true}
         loader={null}
         scrollThreshold={1}
       >
@@ -190,6 +192,7 @@ const Header = styled.header`
 
   background-color: #000000;
   color: #fff;
+  font-size: 2.4rem;
 `;
 
 const Filters = styled.div`
@@ -215,7 +218,7 @@ const FilterIconWrap = styled.div<{ active?: boolean }>`
   }
 `;
 
-const Filter = styled.button<{ active?: boolean }>`
+const Filter = styled.button<{ active?: boolean; femaleFilter?: boolean }>`
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
@@ -228,11 +231,12 @@ const Filter = styled.button<{ active?: boolean }>`
   margin-bottom: 6px;
   transition: background-color 0.15s linear;
 
-  color: ${(props) => (props.active ? "#ffffff" : "#ffffff")};
+  color: #ffffff;
   background-color: ${(props) => (props.active ? "#00a3ff" : "#616161")};
   border-radius: 16px;
   border: none;
   cursor: pointer;
+
   &:hover {
     background-color: ${(props) =>
       props.active ? "#00a3ff" : "rgb(109, 109, 109)"};
