@@ -6,6 +6,7 @@ import {
   FaFemale,
   FaTv,
   FaBook,
+  FaUserAlt,
 } from "react-icons/fa";
 
 interface Props {
@@ -14,15 +15,20 @@ interface Props {
 }
 
 function CharacterItem({ character, onClickDelete }: Props) {
-  const isFemale = character.gender === "Female";
+  // const isFemale = character.gender === "Female";
+  const isName = character.name.length > 0;
   return (
     <Container>
-      <NameWrap>
-        <NameLabel isFemale={isFemale}>
-          {character.name ? character.name.slice(0, 2) : "-"}
-        </NameLabel>
-        <Name>{character.name || "-"}</Name>
-      </NameWrap>
+      <HeadBlock>
+        <Avatar isName={isName}>
+          {character.name ? character.name[0] : <FaUserAlt />}
+        </Avatar>
+        <NameBlock>
+          <Name>{character.name || "No Name"}</Name>
+          <Gender>{character.gender}</Gender>
+        </NameBlock>
+      </HeadBlock>
+
       <AliaseWrap>
         <Label>{"Aliase :"}</Label>
         <EllipseList>
@@ -66,55 +72,72 @@ export default CharacterItem;
 const Container = styled.li`
   width: 100%;
   max-width: 375px;
-  margin-bottom: 24px;
-  margin-right: 24px;
+  margin-bottom: 16px;
 
-  padding: 24px;
+  padding: 16px 20px;
 
-  -webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
   background-color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+
   color: #616161;
   &::last-child {
     margin-bottom: 0;
   }
 `;
 
-const NameWrap = styled.div`
+const HeadBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 `;
 
-const NameLabel = styled.div<{ isFemale: boolean }>`
+const Avatar = styled.div<{ isName: boolean }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
 
-  border-radius: 20px;
-  background-color: #616161;
+  width: 42px;
+  height: 42px;
+
+  border: solid 1px #f3f3f5;
+  border-radius: 50%;
+  background-color: #f8f9fa;
+  font-size: 2.2em;
+  font-weight: 600;
+
   ${(props) =>
-    props.isFemale
-      ? css`
-          background-color: #f48fb1;
-          color: #616161;
-        `
-      : css`
-          background-color: #90caf9;
-          color: #616161;
-        `}
+    props.isName &&
+    css`
+      background-color: #ffffff;
+      border: 1px solid #b2d6ff;
+      color: #0077fe;
+    `}
+`;
+
+const NameBlock = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+
+  width: calc(100% - 42px);
+  padding-left: 6px;
 `;
 
 const Name = styled.div`
-  width: calc(100% - 40px);
-  padding: 0 12px;
-  font-size: 1.5rem;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1.8em;
+  margin-bottom: 3px;
+`;
+
+const Gender = styled.div`
+  width: 100%;
+  font-size: 1.2em;
+  color: #9c9ca7;
 `;
 
 const AliaseWrap = styled.div`

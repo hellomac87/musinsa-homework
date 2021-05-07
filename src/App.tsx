@@ -10,13 +10,7 @@ import queryString from "query-string";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Character } from "store/types/characters";
 import CharacterItem from "components/CharacterItem";
-import {
-  FaBan,
-  FaFemale,
-  FaSyncAlt,
-  FaRegLaughSquint,
-  FaSpinner,
-} from "react-icons/fa";
+import { FaUndoAlt, FaSpinner } from "react-icons/fa";
 
 type FilterState = {
   isAlive: boolean;
@@ -108,47 +102,33 @@ function App() {
         />
       </Header>
 
-      <Filters>
-        <Filter
-          onClick={() => onClickFilter("isAlive")}
-          active={filter.isAlive}
-        >
-          <FilterIconWrap>
-            <FaRegLaughSquint />
-          </FilterIconWrap>
+      <FiltersWrap>
+        <Filters>
+          <Filter
+            onClick={() => onClickFilter("isAlive")}
+            active={filter.isAlive}
+          >
+            {"생존인물만"}
+          </Filter>
 
-          {"생존인물만"}
-        </Filter>
+          <Filter
+            onClick={() => onClickFilter("isFemale")}
+            active={filter.isFemale}
+          >
+            {"여자"}
+          </Filter>
 
-        <FilterFemale
-          onClick={() => onClickFilter("isFemale")}
-          active={filter.isFemale}
-        >
-          <FilterIconWrap>
-            <FaFemale />
-          </FilterIconWrap>
-
-          {"여자"}
-        </FilterFemale>
-
-        <Filter
-          onClick={() => onClickFilter("hasNoTvSeries")}
-          active={filter.hasNoTvSeries}
-        >
-          <FilterIconWrap>
-            <FaBan />
-          </FilterIconWrap>
-
-          {"tvSeries 없음"}
-        </Filter>
-        <Filter onClick={resetRemovedIds}>
-          <FilterIconWrap>
-            <FaSyncAlt />
-          </FilterIconWrap>
-
-          {"초기화"}
-        </Filter>
-      </Filters>
+          <Filter
+            onClick={() => onClickFilter("hasNoTvSeries")}
+            active={filter.hasNoTvSeries}
+          >
+            {"tvSeries 없음"}
+          </Filter>
+        </Filters>
+        <RefreshIconWrap>
+          <FaUndoAlt onClick={resetRemovedIds} style={{ fontSize: "1.5em" }} />
+        </RefreshIconWrap>
+      </FiltersWrap>
 
       <InfiniteScroll
         dataLength={items.length}
@@ -205,50 +185,54 @@ const Header = styled.header`
   }
 `;
 
+const FiltersWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f4f4f4;
+`;
+
 const Filters = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
-  padding: 24px 24px 12px 24px;
-
-  button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-
-    width: auto;
-    height: 34px;
-
-    padding: 0 12px 0 8px;
-    margin-right: 8px;
-    margin-bottom: 6px;
-    /* transition: background-color 0.15s linear; */
-    cursor: pointer;
-  }
 `;
 
-const FilterIconWrap = styled.div`
+const Filter = styled.button<{ active?: boolean }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  width: 24px;
-  height: 24px;
-  margin-right: 2px;
+  height: 34px;
+  padding: 0 14px;
+
+  margin-right: 8px;
+
+  font-size: 1.4em;
+  color: ${(props) => (props.active ? "#ffffff" : "#212121")};
+  background: ${(props) => (props.active ? "#0077fe" : "#ffffff")};
+  border: 1px solid ${(props) => (props.active ? "#0077fe" : "#e8e9ec")};
+
+  cursor: pointer;
 `;
 
-const Filter = styled.button<{ active?: boolean }>`
-  color: ${(props) => (props.active ? "#ffffff" : "#b2b2b2")};
-  background: ${(props) => (props.active ? "#00a3ff" : "#ffffff")};
-  border: 1px solid ${(props) => (props.active ? "#00a3ff" : "#ddd")};
-`;
+const RefreshIconWrap = styled.div`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-const FilterFemale = styled.button<{ active?: boolean }>`
-  color: ${(props) => (props.active ? "#ffffff" : "#b2b2b2")};
-  background: ${(props) => (props.active ? "#f48fb1" : "#ffffff")};
-  border: 1px solid ${(props) => (props.active ? "#f48fb1" : "#ddd")};
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: #212121;
+
+  border: 1px solid #e8e9ec;
 `;
 
 const List = styled.ul`
@@ -257,7 +241,7 @@ const List = styled.ul`
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
-  padding: 12px 24px;
+  padding: 16px;
 `;
 
 const Fetching = styled.div`
