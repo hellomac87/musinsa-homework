@@ -269,5 +269,5 @@ const Fetching = styled.div`
   justify-content: center;
   width: 100%;
   height: 50px;
-  color: #ffffff;
+  color: #000;
 `;
