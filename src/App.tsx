@@ -103,10 +103,9 @@ function App() {
     <Container>
       <Header>
         <img
-          src={`http://image.musinsa.com/mfile_outsrc/img/logo-simbol-musinsache.png?v=1`}
+          src={`https://file.namu.moe/file/46ac7a161088945c83234e32f920b340a6d41175a4b688ff2b759fb765aac658`}
           alt="무신사로고"
         />
-        {"Homework"}
       </Header>
 
       <Filters>
@@ -198,13 +197,11 @@ const Header = styled.header`
   padding: 24px 0;
   width: 100%;
 
-  background-color: #121212;
+  background-color: #000;
   color: #fff;
-  font-size: 1.1rem;
-  line-height: -1.2rem;
+
   img {
-    height: 100px;
-    margin-bottom: 12px;
+    width: 100px;
   }
 `;
 
