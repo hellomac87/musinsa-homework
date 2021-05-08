@@ -5,13 +5,14 @@ import {
   fetchCharacters,
   selectCharactors,
 } from "store/slices/charactersSlice";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import queryString from "query-string";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Character } from "store/types/characters";
 import CharacterItem from "components/CharacterItem";
 import Filter from "components/Filter";
 import Loader from "components/Loader";
+import Logo from "static/img/01.png";
 
 export type FilterState = {
   isAlive: boolean;
@@ -97,10 +98,7 @@ function App() {
   return (
     <Container>
       <Header>
-        <img
-          src={`https://file.namu.moe/file/46ac7a161088945c83234e32f920b340a6d41175a4b688ff2b759fb765aac658`}
-          alt="무신사로고"
-        />
+        <img src={Logo} alt={"무신사 로고"} />
       </Header>
       <Filter
         filter={filter}
