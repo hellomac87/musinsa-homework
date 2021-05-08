@@ -20,7 +20,7 @@ function CharacterItem({ character, onClickDelete }: Props) {
         <NameBlock>
           <Name>{character.name || "No Name"}</Name>
           <Gender>
-            {character.gender} {character.died && " | Dead"}
+            {character.gender} {character.died && " (Dead)"}
           </Gender>
         </NameBlock>
       </HeadBlock>

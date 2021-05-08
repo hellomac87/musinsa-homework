@@ -27,7 +27,7 @@ function Filter({ onClickFilter, filter, resetRemovedIds }: Props) {
           onClick={() => onClickFilter("hasNoTvSeries")}
           active={filter.hasNoTvSeries}
         >
-          {"TvSeries 없음"}
+          {"Tv Series 없음"}
         </Item>
       </Filters>
 
