@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 
 import { ReactComponent as SvgNoName } from "static/svg/03.svg";
 import { ReactComponent as SvgDelete } from "static/svg/04.svg";
+import { useHistory } from "react-router";
 
 interface Props {
   character: Character;
@@ -11,8 +12,15 @@ interface Props {
 
 function CharacterItem({ character, onClickDelete }: Props) {
   const isName = character.name.length > 0;
+  const history = useHistory();
+  const routeToDetail = (url: string) => {
+    const id = url.split("/")[5];
+    history.push(`/character/${id}`);
+  };
+  const isAliases = character.aliases.filter((item) => item).length > 0;
+  const isTitles = character.titles.filter((item) => item).length > 0;
   return (
-    <Container>
+    <Container onClick={() => routeToDetail(character.url)}>
       <HeadBlock>
         <Avatar isName={isName}>
           {character.name ? character.name[0] : <SvgNoName />}
@@ -28,11 +36,11 @@ function CharacterItem({ character, onClickDelete }: Props) {
       <Body>
         <dl>
           <dt>{"Aliase"}</dt>
-          <dd>{character.aliases.join(", ")}</dd>
+          <dd>{isAliases ? character.aliases.join(", ") : "-"}</dd>
         </dl>
         <dl>
           <dt>{"Titles"}</dt>
-          <dd>{character.titles.join(", ")}</dd>
+          <dd>{isTitles ? character.titles.join(", ") : "-"}</dd>
         </dl>
       </Body>
 

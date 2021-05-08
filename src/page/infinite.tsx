@@ -100,6 +100,7 @@ function InfinitePage() {
   );
 
   useEffect(() => {
+    if (items.length > 0) return;
     const p = Number(page as string) || 1;
     dispatch(fetchCharacters(p));
     // eslint-disable-next-line
