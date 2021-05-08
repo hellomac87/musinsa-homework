@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FilterState } from "../App";
+import { FilterState } from "store/types/filter";
 import { ReactComponent as SvgReset } from "static/svg/02.svg";
 
 interface Props {

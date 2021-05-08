@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 interface Props {
-  root: null;
-  target: HTMLElement;
+  root?: null;
+  target: HTMLDivElement | null;
   onIntersect: IntersectionObserverCallback;
-  threshold: number;
-  rootMargin: string;
+  threshold?: number;
+  rootMargin?: string;
 }
 
-export const useInfinteScroll = ({
+const useInfinteScroll = ({
   root = null,
   target,
   onIntersect,
@@ -30,3 +30,5 @@ export const useInfinteScroll = ({
     };
   }, [target, root, rootMargin, onIntersect, threshold]);
 };
+
+export default useInfinteScroll;
