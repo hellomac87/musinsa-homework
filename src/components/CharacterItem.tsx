@@ -1,13 +1,8 @@
 import { Character } from "store/types/characters";
 import styled, { css } from "styled-components";
-import {
-  FaBookDead,
-  FaRegLaughSquint,
-  FaFemale,
-  FaTv,
-  FaBook,
-  FaUserAlt,
-} from "react-icons/fa";
+
+import { ReactComponent as SvgNoName } from "static/svg/03.svg";
+import { ReactComponent as SvgDelete } from "static/svg/04.svg";
 
 interface Props {
   character: Character;
@@ -21,48 +16,36 @@ function CharacterItem({ character, onClickDelete }: Props) {
     <Container>
       <HeadBlock>
         <Avatar isName={isName}>
-          {character.name ? character.name[0] : <FaUserAlt />}
+          {character.name ? character.name[0] : <SvgNoName />}
         </Avatar>
         <NameBlock>
           <Name>{character.name || "No Name"}</Name>
-          <Gender>{character.gender}</Gender>
+          <Gender>
+            {character.gender} {character.died && " | Dead"}
+          </Gender>
         </NameBlock>
       </HeadBlock>
 
-      <AliaseWrap>
-        <Label>{"Aliase :"}</Label>
-        <EllipseList>
-          {character.aliases.map((aliase) => (
-            <li key={aliase}>{aliase}</li>
-          ))}
-        </EllipseList>
-      </AliaseWrap>
+      <Body>
+        <dl>
+          <dt>{"Aliase"}</dt>
+          <dd>{character.aliases.join(", ")}</dd>
+        </dl>
+        <dl>
+          <dt>{"Titles"}</dt>
+          <dd>{character.titles.join(", ")}</dd>
+        </dl>
+      </Body>
 
-      <ul>
-        titles:
-        {character.titles.map((title) => (
-          <li key={title}>{title}</li>
-        ))}
-      </ul>
-      <div>
-        <FaWrapper size={1.3}>
-          <FaBook />
-        </FaWrapper>
-        :{character.books.length}
-      </div>
-      <div>
-        <FaWrapper size={1.3}>
-          <FaTv />
-        </FaWrapper>
-        :{character.tvSeries.length}
-      </div>
+      <Bottom>
+        <span>Books {character.books.length}</span>
+        <span>Tv Series {character.tvSeries.length}</span>
+      </Bottom>
 
-      <div>
-        {character.died ? <FaBookDead /> : <FaRegLaughSquint />}{" "}
-        {character.gender === "Female" && <FaFemale />}
-      </div>
       {/* <div>dead: {character.died}</div> */}
-      <button onClick={onClickDelete}>{"삭제"}</button>
+      <Delete>
+        <SvgDelete onClick={onClickDelete}>{"삭제"}</SvgDelete>
+      </Delete>
     </Container>
   );
 }
@@ -70,6 +53,7 @@ function CharacterItem({ character, onClickDelete }: Props) {
 export default CharacterItem;
 
 const Container = styled.li`
+  position: relative;
   width: 100%;
   max-width: 375px;
   margin-bottom: 16px;
@@ -140,26 +124,63 @@ const Gender = styled.div`
   color: #9c9ca7;
 `;
 
-const AliaseWrap = styled.div`
+const Body = styled.div`
   width: 100%;
+  margin-bottom: 16px;
+  dl {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 8px;
+    &::last-child {
+      margin-bottom: 0;
+    }
+
+    dt {
+      width: 40px;
+      font-size: 1.4em;
+      color: #9c9ca7;
+    }
+    dd {
+      width: calc(100% - 40px);
+      font-size: 1.4em;
+      color: #212121;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
 `;
 
-const Label = styled.label`
-  display: inline-block;
-  width: auto;
-  max-width: 60px;
-`;
-
-const EllipseList = styled.ul`
-  width: 100%;
-  max-width: calc(100% - 60px);
-  display: inline-block;
-`;
-
-const FaWrapper = styled.div<{ size?: number }>`
+const Bottom = styled.div`
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: space-between;
 
-  font-size: ${(props) => props.size && `${props.size}rem`};
+  padding: 10px 14px;
+  background-color: #f8f9fa;
+
+  span {
+    font-size: 1.4em;
+    color: #9c9ca7;
+
+    &:first-child {
+      &:after {
+        display: inline-block;
+        content: "|";
+        color: #e1e1e5;
+        font-size: 1em;
+        padding: 0 12px;
+      }
+    }
+  }
+`;
+
+const Delete = styled.div`
+  display: inline-block;
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  cursor: pointer;
 `;
