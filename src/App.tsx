@@ -162,17 +162,10 @@ const Header = styled.header`
 const List = styled.ul`
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
+  margin: 0 auto;
   width: 100%;
+  max-width: 768px;
   padding: 16px;
-`;
-
-const Fetching = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 50px;
-  color: #000;
 `;

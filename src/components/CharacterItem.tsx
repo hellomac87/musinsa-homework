@@ -54,7 +54,7 @@ export default CharacterItem;
 
 const Container = styled.li`
   position: relative;
-  width: 100%;
+  width: 48%;
   max-width: 375px;
   margin-bottom: 16px;
 
@@ -67,6 +67,10 @@ const Container = styled.li`
   color: #616161;
   &::last-child {
     margin-bottom: 0;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
   }
 `;
 
