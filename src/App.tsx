@@ -10,7 +10,6 @@ import queryString from "query-string";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Character } from "store/types/characters";
 import CharacterItem from "components/CharacterItem";
-import { FaSpinner } from "react-icons/fa";
 import Filter from "components/Filter";
 import Loader from "components/Loader";
 
