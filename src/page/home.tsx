@@ -63,7 +63,7 @@ function Home() {
 
   function removeIdsFilter(items: Character[]) {
     if (removedItemIds.length > 0) {
-      items = items.filter((item) => !removedItemIds.includes(item.id));
+      items = items.filter((item) => !removedItemIds.includes(item.url));
     }
     return items;
   }
@@ -117,8 +117,8 @@ function Home() {
             return (
               <CharacterItem
                 character={character}
-                key={character.id}
-                onClickDelete={() => deleteItem(character.id)}
+                key={character.url}
+                onClickDelete={() => deleteItem(character.url)}
               />
             );
           })}

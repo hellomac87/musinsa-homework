@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import apiClient from "api";
 import type { AppDispatch, RootState } from "store";
 import { Character } from "store/types/characters";
-import { v4 as uuidv4 } from "uuid";
 
 // Define a type for the slice state
 interface CharactersState {
@@ -74,7 +73,6 @@ export const fetchCharacters = (page: number) => async (
     const items = response.data.map((item: Character) => {
       return {
         ...item,
-        id: uuidv4(),
       };
     });
     dispatch(charactersSlice.actions.success({ items, page }));

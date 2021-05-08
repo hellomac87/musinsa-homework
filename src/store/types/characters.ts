@@ -1,5 +1,4 @@
 export interface Character {
-  id: string; // custom id
   url: string;
   name: string;
   gender: string;
