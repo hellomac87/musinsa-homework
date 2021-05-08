@@ -10,9 +10,10 @@ import queryString from "query-string";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Character } from "store/types/characters";
 import CharacterItem from "components/CharacterItem";
-import { FaUndoAlt, FaSpinner } from "react-icons/fa";
+import { FaSpinner } from "react-icons/fa";
+import Filter from "components/Filter";
 
-type FilterState = {
+export type FilterState = {
   isAlive: boolean;
   isFemale: boolean;
   hasNoTvSeries: boolean;
@@ -101,34 +102,11 @@ function App() {
           alt="무신사로고"
         />
       </Header>
-
-      <FiltersWrap>
-        <Filters>
-          <Filter
-            onClick={() => onClickFilter("isAlive")}
-            active={filter.isAlive}
-          >
-            {"생존인물만"}
-          </Filter>
-
-          <Filter
-            onClick={() => onClickFilter("isFemale")}
-            active={filter.isFemale}
-          >
-            {"여자"}
-          </Filter>
-
-          <Filter
-            onClick={() => onClickFilter("hasNoTvSeries")}
-            active={filter.hasNoTvSeries}
-          >
-            {"tvSeries 없음"}
-          </Filter>
-        </Filters>
-        <RefreshIconWrap>
-          <FaUndoAlt onClick={resetRemovedIds} style={{ fontSize: "1.5em" }} />
-        </RefreshIconWrap>
-      </FiltersWrap>
+      <Filter
+        filter={filter}
+        onClickFilter={onClickFilter}
+        resetRemovedIds={resetRemovedIds}
+      />
 
       <InfiniteScroll
         dataLength={items.length}
@@ -183,56 +161,6 @@ const Header = styled.header`
   img {
     width: 100px;
   }
-`;
-
-const FiltersWrap = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 12px 16px;
-  border-bottom: 1px solid #f4f4f4;
-`;
-
-const Filters = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  width: 100%;
-`;
-
-const Filter = styled.button<{ active?: boolean }>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  height: 34px;
-  padding: 0 14px;
-
-  margin-right: 8px;
-
-  font-size: 1.4em;
-  color: ${(props) => (props.active ? "#ffffff" : "#212121")};
-  background: ${(props) => (props.active ? "#0077fe" : "#ffffff")};
-  border: 1px solid ${(props) => (props.active ? "#0077fe" : "#e8e9ec")};
-
-  cursor: pointer;
-`;
-
-const RefreshIconWrap = styled.div`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  color: #212121;
-
-  border: 1px solid #e8e9ec;
 `;
 
 const List = styled.ul`
