@@ -6,9 +6,10 @@ import styled, { css } from "styled-components";
 
 function CharacterPage() {
   const params: any = useParams();
-  const { data } = useFetch<Character>(`/characters/${params.id}`);
+  const { data, error } = useFetch<Character>(`/characters/${params.id}`);
 
   if (!data) return <Loader />;
+  if (error) return <div>{error}</div>;
   return (
     <Container>
       <Header>
@@ -59,7 +60,7 @@ const Header = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  padding: 24px;
+  padding: 16px 24px;
   border-bottom: 1px solid #fafafa;
 `;
 
@@ -68,8 +69,8 @@ const Avatar = styled.div<{ isName: boolean }>`
   align-items: center;
   justify-content: center;
 
-  width: 42px;
-  height: 42px;
+  width: 60px;
+  height: 60px;
 
   border: solid 1px #f3f3f5;
   border-radius: 50%;
@@ -77,7 +78,7 @@ const Avatar = styled.div<{ isName: boolean }>`
   font-size: 2.2em;
   font-weight: 600;
 
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 
   ${(props) =>
     props.isName &&
@@ -101,13 +102,13 @@ const NameBlock = styled.div`
 const Name = styled.div`
   width: 100%;
   font-weight: 600;
-  font-size: 1.8em;
-  margin-bottom: 3px;
+  font-size: 2.4em;
+  margin-bottom: 6px;
 `;
 
 const Gender = styled.div`
   width: 100%;
-  font-size: 1.2em;
+  font-size: 1.6em;
   color: #9c9ca7;
 `;
 
@@ -123,12 +124,12 @@ const Content = styled.div`
 const Title = styled.div`
   width: 100%;
   font-weight: 600;
-  font-size: 1.8em;
+  font-size: 2em;
   margin-bottom: 12px;
 `;
 
 const Body = styled.div`
   width: 100%;
 
-  font-size: 1.4em;
+  font-size: 1.6em;
 `;
