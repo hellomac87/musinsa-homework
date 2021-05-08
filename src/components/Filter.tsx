@@ -27,7 +27,7 @@ function Filter({ onClickFilter, filter, resetRemovedIds }: Props) {
           onClick={() => onClickFilter("hasNoTvSeries")}
           active={filter.hasNoTvSeries}
         >
-          {"tvSeries 없음"}
+          {"TvSeries 없음"}
         </Item>
       </Filters>
 
@@ -47,8 +47,12 @@ const Container = styled.div`
   width: 100%;
   max-width: 720px;
   margin: 0 auto;
-  padding: 12px 16px;
+  padding: 12px 0;
   border-bottom: 1px solid #f4f4f4;
+
+  @media only screen and (max-width: 768px) {
+    padding: 12px 16px;
+  }
 `;
 
 const Filters = styled.div`

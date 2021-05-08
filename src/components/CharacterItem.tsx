@@ -10,7 +10,6 @@ interface Props {
 }
 
 function CharacterItem({ character, onClickDelete }: Props) {
-  // const isFemale = character.gender === "Female";
   const isName = character.name.length > 0;
   return (
     <Container>
@@ -42,7 +41,6 @@ function CharacterItem({ character, onClickDelete }: Props) {
         <span>Tv Series {character.tvSeries.length}</span>
       </Bottom>
 
-      {/* <div>dead: {character.died}</div> */}
       <Delete>
         <SvgDelete onClick={onClickDelete}>{"삭제"}</SvgDelete>
       </Delete>
