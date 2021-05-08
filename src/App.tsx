@@ -12,6 +12,7 @@ import { Character } from "store/types/characters";
 import CharacterItem from "components/CharacterItem";
 import { FaSpinner } from "react-icons/fa";
 import Filter from "components/Filter";
+import Loader from "components/Loader";
 
 export type FilterState = {
   isAlive: boolean;
@@ -131,12 +132,7 @@ function App() {
         </List>
       </InfiniteScroll>
 
-      {fetching && (
-        <Fetching>
-          <FaSpinner />
-          {"fetching..."}
-        </Fetching>
-      )}
+      {fetching && <Loader />}
     </Container>
   );
 }
