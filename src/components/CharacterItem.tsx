@@ -54,7 +54,7 @@ export default CharacterItem;
 
 const Container = styled.li`
   position: relative;
-  width: 48%;
+  width: 48.8%;
   max-width: 375px;
   margin-bottom: 16px;
 
