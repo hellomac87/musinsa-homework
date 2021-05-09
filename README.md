@@ -30,6 +30,8 @@ $ yarn start
 
 브라우저를 열어 `localhost:3000` 주소로 실행합니다.
 
+[netlify live demo](https://epic-hypatia-07ccd2.netlify.app/)
+
 ---
 
 ## stack
