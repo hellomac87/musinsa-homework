@@ -50,7 +50,14 @@ function CharacterItem({ character, onClickDelete }: Props) {
       </Bottom>
 
       <Delete>
-        <SvgDelete onClick={onClickDelete}>{"삭제"}</SvgDelete>
+        <SvgDelete
+          onClick={(e) => {
+            e.stopPropagation();
+            onClickDelete();
+          }}
+        >
+          {"삭제"}
+        </SvgDelete>
       </Delete>
     </Container>
   );
