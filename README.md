@@ -1,6 +1,6 @@
 # musinsa-homework
 
-## getting start
+## getting started
 
 해당 프로젝트는 노드 패키지 매니저로 `yarn` 을 사용하였습니다.
 
